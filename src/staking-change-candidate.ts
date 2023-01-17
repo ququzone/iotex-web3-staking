@@ -18,19 +18,18 @@ async function main() {
         wallet
     )
 
-    const tx = await staking.createStake(
-        "robotbp00001",
-        ethers.utils.parseEther("100"),
-        1, // 1 days
-        true,
+    const index = 201
+    const tx = await staking.changeCandidate(
+        "robotbp00007",
+        index,
         []
     )
     const receipt = await tx.wait()
     if (receipt.status !== 1) {
-        console.log(`create stake fail`)
+        console.log(`change candidate fail`)
         return
     }
-    console.log(`create bucket ${ethers.BigNumber.from(receipt.events[0].topics[1]).toString()} with tx ${tx.hash}`)
+    console.log(`change bucket #${index} candidate with tx ${tx.hash}`)
 }
 
 main()
